@@ -13,10 +13,10 @@
 	</appenders>
 
 	<loggers>
-		<logger name="com.zhengzhuanglaile.oms.wechatpay" level="info" additivity="false">
+		<logger name="com.zhengzhuanglaile.wechatpay" level="info" additivity="false">
             <appender-ref ref="CONSOLE"/>
         </logger>
-		<logger name="com.zhengzhuanglaile.oms.wechatpay.util" level="info" additivity="false">
+		<logger name="com.zhengzhuanglaile.wechatpay.util" level="info" additivity="false">
             <appender-ref ref="CONSOLE"/>
         </logger>
 		<root level="error">
