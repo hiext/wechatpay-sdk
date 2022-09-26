@@ -5,6 +5,7 @@ import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
  * 结算信息
+ * 
  * @author dengying.zhang 2022年8月18日 下午3:01:31
  * @since 1.0.0
  */
@@ -21,6 +22,10 @@ public class WechatPaySettleInfo {
     }
 
     public void setProfitSharing(boolean profitSharing) {
+        this.profitSharing = profitSharing;
+    }
+
+    public WechatPaySettleInfo(boolean profitSharing){
         this.profitSharing = profitSharing;
     }
 
