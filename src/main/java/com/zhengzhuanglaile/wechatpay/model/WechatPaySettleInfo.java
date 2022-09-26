@@ -25,6 +25,9 @@ public class WechatPaySettleInfo {
         this.profitSharing = profitSharing;
     }
 
+    public WechatPaySettleInfo(){
+    }
+
     public WechatPaySettleInfo(boolean profitSharing){
         this.profitSharing = profitSharing;
     }
