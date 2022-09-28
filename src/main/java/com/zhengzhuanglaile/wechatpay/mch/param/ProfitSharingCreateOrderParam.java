@@ -1,4 +1,4 @@
-package com.zhengzhuanglaile.wechatpay.isv.param;
+package com.zhengzhuanglaile.wechatpay.mch.param;
 
 import java.util.List;
 
@@ -7,23 +7,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.google.gson.annotations.SerializedName;
+import com.zhengzhuanglaile.wechatpay.isv.param.Receivers;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
-/**
- * 请求分账参数
- * @author dengying.zhang 2022年9月16日 下午1:52:46
- * @since 1.0.0
- */
-public class WechatPayProfitSharingCreateOrderParam {
-
-    /**
-     * 子商户号   string[1,32]    是   body 子商户号
-    示例值：1230000109
-     */
-    @NotNull(message = "sub_mchid 子商户号不能为空")
-    @Length(min = 1, max = 32)
-    @SerializedName("sub_mchid")
-    private String          subMchid;
+public class ProfitSharingCreateOrderParam {
 
     /**
      * 应用ID-微信分配的公众账号ID
@@ -32,14 +19,6 @@ public class WechatPayProfitSharingCreateOrderParam {
     @Length(min = 1, max = 32)
     @SerializedName("appid")
     private String          appid;
-
-    /**
-     * 子商户应用ID  sub_appid   string[1,32]    否   子商户的公众账号ID，分账接收方类型包含PERSONAL_SUB_OPENID时必填
-    示例值：wxd678efh567hg6999
-     */
-    @Length(min = 1, max = 32)
-    @SerializedName("sub_appid")
-    private String          subAppid;
 
     /**
      * 微信支付订单号
@@ -58,9 +37,7 @@ public class WechatPayProfitSharingCreateOrderParam {
     private String          outOrderNo;
 
     /**
-     * 是否解冻剩余未分资金
-     * 1、如果为true，该笔订单剩余未分账的金额会解冻回分账方商户;
-     * 2、如果为false，该笔订单剩余未分账的金额不会解冻回分账方商户，可以对该笔订单再次进行分账;
+     * 是否解冻剩余未分资金 1、如果为true，该笔订单剩余未分账的金额会解冻回分账方商户; 2、如果为false，该笔订单剩余未分账的金额不会解冻回分账方商户，可以对该笔订单再次进行分账;
      */
     @NotNull
     @SerializedName("unfreeze_unsplit")
@@ -72,28 +49,12 @@ public class WechatPayProfitSharingCreateOrderParam {
     @SerializedName("receivers")
     private List<Receivers> receivers;
 
-    public String getSubMchid() {
-        return subMchid;
-    }
-
-    public void setSubMchid(String subMchid) {
-        this.subMchid = subMchid;
-    }
-
     public String getAppid() {
         return appid;
     }
 
     public void setAppid(String appid) {
         this.appid = appid;
-    }
-
-    public String getSubAppid() {
-        return subAppid;
-    }
-
-    public void setSubAppid(String subAppid) {
-        this.subAppid = subAppid;
     }
 
     public String getTransactionId() {
@@ -132,5 +93,4 @@ public class WechatPayProfitSharingCreateOrderParam {
     public String toString() {
         return GsonUtil.getGson().toJson(this);
     }
-
 }

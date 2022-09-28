@@ -29,7 +29,7 @@ public class WechatPayNativePayApiTest {
 
     private final String                 spMchid         = "1627846695";
 
-    private final String                 subMchid        = "1630124950";
+    private final String                 subMchid        = "1630412847";
 
     private final String                 notifyUrl       = "https://shop.zhengzhuanglaile.com/site/wechatpay/nativenotify";
 
@@ -40,7 +40,7 @@ public class WechatPayNativePayApiTest {
         .setPrivateKey(WechatPayConstant.getMerchantPrivatekey())
         .build();
 
-    @Test
+   // @Test
     public void testCreatOrder() {
         WechatPayIsvNativePayCreateOrderParam param = new WechatPayIsvNativePayCreateOrderParam();
         param.setSpAppid(spAppid);
@@ -58,10 +58,10 @@ public class WechatPayNativePayApiTest {
             zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT, Locale.CHINA)));
     }
 
-    // @Test
+    @Test
     public void testQueryOrderStatus() {
         IsvPayOrderStatusQueryParam csaobStatusQueryParam = new IsvPayOrderStatusQueryParam();
-        String outTraderNo = "1630412847001008";
+        String outTraderNo = "wos202209261724008748716655";
         csaobStatusQueryParam.setOutTradeNo(outTraderNo);
         csaobStatusQueryParam.setSpMchid(spMchid);
         csaobStatusQueryParam.setSubMchid(subMchid);

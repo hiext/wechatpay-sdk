@@ -4,21 +4,23 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.zhengzhuanglaile.wechatpay.mch.param.ProfitSharingQueryParam;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
- * 解冻剩余资金参数
- * @author dengying.zhang 2022年9月16日 下午3:38:49
+ * 查询分账结果参数 发起分账请求后，可调用此接口查询分账结果 注意： • 发起解冻剩余资金请求后，可调用此接口查询解冻剩余资金的结果
+ * 
+ * @author dengying.zhang 2022年9月16日 下午3:35:36
  * @since 1.0.0
  */
-public class WechatPayProfitSharingUnfreezeParam {
+public class IsvProfitSharingQueryParam extends ProfitSharingQueryParam {
 
     /**
-     * 子商户号    sub_mchid    string[1,32]    是   body 子商户号，由微信支付生成并下发
-    示例值：1230000109
+     * 服务商户号 sp_mchid string[1,32] 是 body 服务商户号，由微信支付生成并下发 示例值：1230000109
      */
-    @NotNull(message = "sub_mchid 子商户号不能为空")
+    @NotNull(message = "sp_mchid 服务商户号不能为空")
     @Length(min = 1, max = 32)
     @SerializedName("sub_mchid")
     private String subMchid;
@@ -37,16 +39,8 @@ public class WechatPayProfitSharingUnfreezeParam {
     @NotNull
     @Length(min = 1, max = 32)
     @SerializedName("out_order_no")
+    @Expose(serialize = false)
     private String outOrderNo;
-
-    /**
-     * 分账描述
-     */
-
-    @NotNull
-    @Length(max = 80, min = 1)
-    @SerializedName("description")
-    private String description;
 
     public String getSubMchid() {
         return subMchid;
@@ -54,30 +48,6 @@ public class WechatPayProfitSharingUnfreezeParam {
 
     public void setSubMchid(String subMchid) {
         this.subMchid = subMchid;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getOutOrderNo() {
-        return outOrderNo;
-    }
-
-    public void setOutOrderNo(String outOrderNo) {
-        this.outOrderNo = outOrderNo;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
