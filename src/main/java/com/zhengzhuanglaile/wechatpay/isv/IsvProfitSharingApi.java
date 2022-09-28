@@ -141,7 +141,7 @@ public class IsvProfitSharingApi {
      * @param wechatPayConfig
      * @return
      */
-    public IsvProfitSharingCreateOrderResult queryOrderState(IsvProfitSharingQueryParam param,
+    public static IsvProfitSharingCreateOrderResult queryOrderState(IsvProfitSharingQueryParam param,
                                                              WechatPayConfig wechatPayConfig) {
         init();
         Set<ConstraintViolation<IsvProfitSharingQueryParam>> set = validator.validate(param);
@@ -195,7 +195,7 @@ public class IsvProfitSharingApi {
      * @param wechatPayConfig
      * @return
      */
-    public IsvProfitSharingCreateOrderResult unfreeze(IsvProfitSharingUnfreezeParam param,
+    public static IsvProfitSharingCreateOrderResult unfreeze(IsvProfitSharingUnfreezeParam param,
                                                       WechatPayConfig wechatPayConfig) {
         init();
         Set<ConstraintViolation<IsvProfitSharingUnfreezeParam>> set = validator.validate(param);
