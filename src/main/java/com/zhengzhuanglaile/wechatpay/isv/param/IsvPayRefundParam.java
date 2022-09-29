@@ -1,13 +1,17 @@
-package com.zhengzhuanglaile.wechatpay.isv.nativepay.param;
+package com.zhengzhuanglaile.wechatpay.isv.param;
 
 import javax.validation.constraints.NotNull;
 
+import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.RefundAmountParam;
 import org.hibernate.validator.constraints.Length;
 
 import com.google.gson.annotations.SerializedName;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
-public class NativePayRefundParam {
+/**
+ * @author dengying.zhang
+ */
+public class IsvPayRefundParam {
 
     /**
      * 子商户号 sub_mchid   string[1,32]    是   body 子商户的商户号，由微信支付生成并下发。

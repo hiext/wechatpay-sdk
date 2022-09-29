@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.zhengzhuanglaile.wechatpay.isv.WechatPayIsvNativePayApi;
 import com.zhengzhuanglaile.wechatpay.isv.model.WechatPayIsvOrderInfo;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.NativePayRefundParam;
+import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.RefundAmountParam;
 import com.zhengzhuanglaile.wechatpay.isv.param.IsvCloseOrderParam;
 import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayOrderStatusQueryParam;
@@ -82,7 +82,7 @@ public class WechatPayNativePayApiTest {
 
     // @Test
     public void testRefund() {
-        NativePayRefundParam narivePayRefundParam = new NativePayRefundParam();
+        IsvPayRefundParam narivePayRefundParam = new IsvPayRefundParam();
         RefundAmountParam amountParam = new RefundAmountParam();
         amountParam.setRefund(500);
         amountParam.setTotal(500);

@@ -18,7 +18,7 @@ import javax.validation.ValidatorFactory;
 import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
 import com.zhengzhuanglaile.wechatpay.base.BaseCloseOrderParam;
 import com.zhengzhuanglaile.wechatpay.isv.model.WechatPayIsvOrderInfo;
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.NativePayRefundParam;
+import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
 import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayOrderStatusQueryParam;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
@@ -271,13 +271,13 @@ public class WechatPayIsvNativePayApi {
         return result;
     }
 
-    public static WechatPayBaseResult refund(NativePayRefundParam param, WechatPayConfig wechatPayConfig) {
+    public static WechatPayBaseResult refund(IsvPayRefundParam param, WechatPayConfig wechatPayConfig) {
 
         init();
-        Set<ConstraintViolation<NativePayRefundParam>> set = validator.validate(param);
+        Set<ConstraintViolation<IsvPayRefundParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
-            for (ConstraintViolation<NativePayRefundParam> constraintViolation : set) {
+            for (ConstraintViolation<IsvPayRefundParam> constraintViolation : set) {
                 validateString.add(
                     "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
