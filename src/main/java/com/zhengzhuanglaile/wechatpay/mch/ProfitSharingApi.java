@@ -142,7 +142,7 @@ public class ProfitSharingApi {
      * @return
      */
     public static ProfitSharingCreateOrderResult queryOrderState(ProfitSharingQueryParam param,
-                                                          WechatPayConfig wechatPayConfig) {
+                                                                 WechatPayConfig wechatPayConfig) {
         init();
         Set<ConstraintViolation<ProfitSharingQueryParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
@@ -195,7 +195,8 @@ public class ProfitSharingApi {
      * @param wechatPayConfig
      * @return
      */
-    public static ProfitSharingCreateOrderResult unfreeze(ProfitSharingUnfreezeParam param, WechatPayConfig wechatPayConfig) {
+    public static ProfitSharingCreateOrderResult unfreeze(ProfitSharingUnfreezeParam param,
+                                                          WechatPayConfig wechatPayConfig) {
         init();
         Set<ConstraintViolation<ProfitSharingUnfreezeParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {

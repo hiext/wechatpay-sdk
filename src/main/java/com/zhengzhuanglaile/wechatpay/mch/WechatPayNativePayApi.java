@@ -48,6 +48,7 @@ import com.zhengzhuanglaile.wechatpay.isv.WechatPayIsvNativePayApi;
 
 /**
  * 商户号直连方式原生支付
+ * 
  * @author dengying.zhang 2022年8月23日 下午1:29:33
  * @since 1.0.0
  */
@@ -69,18 +70,20 @@ public class WechatPayNativePayApi {
 
     /**
      * 微信支付创建支付订单
+     * 
      * @param param
      * @param wechatPayConfig
      * @return
      */
-    public static NativePayResult createOrder(WechatPayNativePayCreateOrderParam param, WechatPayConfig wechatPayConfig) {
+    public static NativePayResult createOrder(WechatPayNativePayCreateOrderParam param,
+                                              WechatPayConfig wechatPayConfig) {
         init();
         Set<ConstraintViolation<WechatPayNativePayCreateOrderParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
             for (ConstraintViolation<WechatPayNativePayCreateOrderParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -90,8 +93,8 @@ public class WechatPayNativePayApi {
         // 如果订单创建没有设置过期时间，设置默认24小时后关闭订单
         if (null == param.getTimeExpire() || "".equals(param.getTimeExpire())) {
             ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).plusDays(1L);
-            param.setTimeExpire(zonedDateTime
-                .format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT, Locale.CHINA)));
+            param.setTimeExpire(zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT,
+                                                                                 Locale.CHINA)));
         }
 
         RequestClientUtil requestClientUtil = RequestClientUtil.build(wechatPayConfig);
@@ -100,7 +103,7 @@ public class WechatPayNativePayApi {
         logger.info("=========初始化参数==============");
         HttpPost httpPost = new HttpPost(uri);
         StringEntity entity = new StringEntity(GsonUtil.getGson().toJson(param),
-            Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
+                                               Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
         logger.info("=========参数:" + WechatPayIsvNativePayCreateOrderParam.class + "==============");
         httpPost.setEntity(entity);
@@ -153,6 +156,7 @@ public class WechatPayNativePayApi {
 
     /**
      * 根据商户的订单号查询微信支付订单状态
+     * 
      * @param param
      * @param wechatPayConfig
      * @return
@@ -164,8 +168,8 @@ public class WechatPayNativePayApi {
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
             for (ConstraintViolation<WechatPayOrderStatusQueryParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -206,6 +210,7 @@ public class WechatPayNativePayApi {
 
     /**
      * 关闭微信订单
+     * 
      * @param param
      * @param wechatPayConfig
      * @return
@@ -216,8 +221,8 @@ public class WechatPayNativePayApi {
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
             for (ConstraintViolation<WechatPayCloseOrderParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -229,7 +234,7 @@ public class WechatPayNativePayApi {
         CloseableHttpClient httpClient = requestClientUtil.getHttpClient();
         HttpPost httpPost = new HttpPost(uri);
         StringEntity entity = new StringEntity(GsonUtil.getGson().toJson(param),
-            Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
+                                               Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
         httpPost.setEntity(entity);
         httpPost.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString());
@@ -279,8 +284,8 @@ public class WechatPayNativePayApi {
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
             for (ConstraintViolation<IsvPayRefundParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -293,7 +298,7 @@ public class WechatPayNativePayApi {
         logger.info("=========初始化参数==============");
         HttpPost httpPost = new HttpPost(uri);
         StringEntity entity = new StringEntity(GsonUtil.getGson().toJson(param),
-            Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
+                                               Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
         logger.info("=========参数:" + WechatPayIsvNativePayCreateOrderParam.class + "==============");
         httpPost.setEntity(entity);

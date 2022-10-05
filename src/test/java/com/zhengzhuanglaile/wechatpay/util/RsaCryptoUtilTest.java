@@ -13,8 +13,7 @@ public class RsaCryptoUtilTest {
     private static Logger logger     = LoggerFactory.getLogger(RsaCryptoUtilTest.class);
     private final String  APPID      = "wx4f40bc48ba22a9eb";
 
-    private final String  privateKey = WechatPayRsaCrypUtil
-        .readPrivateKeyToString("\\d:\\wechatpaycert\\hanlan_key.pem");
+    private final String  privateKey = WechatPayRsaCrypUtil.readPrivateKeyToString("\\d:\\wechatpaycert\\hanlan_key.pem");
 
     @Test
     public void testEn() throws BadPaddingException {

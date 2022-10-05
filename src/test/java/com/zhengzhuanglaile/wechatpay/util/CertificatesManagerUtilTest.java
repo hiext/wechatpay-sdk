@@ -16,6 +16,7 @@ import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
 
 /**
  * 证书测试
+ * 
  * @author dengying.zhang 2022年8月18日 上午11:33:29
  * @since 1.0.0
  */
@@ -26,12 +27,7 @@ public class CertificatesManagerUtilTest {
     @Test
     public void test() throws NotFoundException, HttpCodeException, ValidationException, IOException,
                        GeneralSecurityException {
-        WechatPayConfig wechatPayConfig = WechatPayConfig.builder()
-            .setApiV3Key(WechatPayConstant.getApiv3key())
-            .setMerchantId(WechatPayConstant.getMerchantId())
-            .setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber())
-            .setPrivateKey(WechatPayConstant.getMerchantPrivatekey())
-            .build();
+        WechatPayConfig wechatPayConfig = WechatPayConfig.builder().setApiV3Key(WechatPayConstant.getApiv3key()).setMerchantId(WechatPayConstant.getMerchantId()).setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber()).setPrivateKey(WechatPayConstant.getMerchantPrivatekey()).build();
         CertificatesManagerUtil certificatesManagerUtil = CertificatesManagerUtil.builder(wechatPayConfig);
         WechatPayCertificateResult certificateResult = certificatesManagerUtil.getCertificate();
         logger.info(GsonUtil.getGson().toJson(certificateResult));

@@ -6,6 +6,7 @@ import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
  * 分账接收方列表
+ * 
  * @author dengying.zhang 2022年9月16日 下午2:55:34
  * @since 1.0.0
  */

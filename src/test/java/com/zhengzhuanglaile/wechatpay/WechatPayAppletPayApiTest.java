@@ -22,7 +22,6 @@ import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
- * 
  * @author dengying.zhang 2022年8月20日 下午3:47:37
  * @since 1.0.0
  */
@@ -34,12 +33,7 @@ public class WechatPayAppletPayApiTest {
 
     private final String                 subMchid        = "1630124950";
 
-    private static final WechatPayConfig wechatPayConfig = WechatPayConfig.builder()
-        .setApiV3Key(WechatPayConstant.getApiv3key())
-        .setMerchantId(WechatPayConstant.getMerchantId())
-        .setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber())
-        .setPrivateKey(WechatPayConstant.getMerchantPrivatekey())
-        .build();
+    private static final WechatPayConfig wechatPayConfig = WechatPayConfig.builder().setApiV3Key(WechatPayConstant.getApiv3key()).setMerchantId(WechatPayConstant.getMerchantId()).setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber()).setPrivateKey(WechatPayConstant.getMerchantPrivatekey()).build();
 
     // @Test
     public void testCreatOrder() {
@@ -66,8 +60,8 @@ public class WechatPayAppletPayApiTest {
         logger.info(result.getPrepayId());
         logger.info(GsonUtil.getGson().toJson(result));
         ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).plusDays(1L);
-        logger.info(
-            zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT, Locale.CHINA)));
+        logger.info(zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT,
+                                                                     Locale.CHINA)));
     }
 
     @Test
@@ -78,7 +72,7 @@ public class WechatPayAppletPayApiTest {
         csaobStatusQueryParam.setSpMchid(spMchid);
         csaobStatusQueryParam.setSubMchid(subMchid);
         WechatPayIsvOrderInfo statusQueryResult = WechatPayIsvAppletApi.queryOrderStatus(csaobStatusQueryParam,
-            wechatPayConfig);
+                                                                                         wechatPayConfig);
         logger.info(statusQueryResult.toString());
     }
 

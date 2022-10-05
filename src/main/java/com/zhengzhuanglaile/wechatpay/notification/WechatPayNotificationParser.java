@@ -27,6 +27,7 @@ import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
  * 微信通知信息 转换
+ * 
  * @author dengying.zhang 2022年8月19日 下午8:33:16
  * @since 1.0.0
  */
@@ -68,8 +69,10 @@ public class WechatPayNotificationParser {
 
         // 向证书管理器增加需要自动更新平台证书的商户信息
         certificatesManager.putMerchant(merchantId,
-            new WechatPay2Credentials(merchantId, new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey)),
-            apiV3Key.getBytes(StandardCharsets.UTF_8));
+                                        new WechatPay2Credentials(merchantId,
+                                                                  new PrivateKeySigner(merchantSerialNumber,
+                                                                                       merchantPrivateKey)),
+                                        apiV3Key.getBytes(StandardCharsets.UTF_8));
         // 从证书管理器中获取verifier
         this.verifier = certificatesManager.getVerifier(merchantId);
         this.apiV3Key = apiV3Key.getBytes(StandardCharsets.UTF_8);
@@ -87,10 +90,11 @@ public class WechatPayNotificationParser {
     }
 
     /**
-     * 微信支付回调消息  验签和解析请求体
+     * 微信支付回调消息 验签和解析请求体
+     * 
      * @param notificationRequest 请求
      * @return 解密后的消息 Notification.getDecryptData();
-     * @throws ParseException 
+     * @throws ParseException
      */
     public Notification parser(NotificationRequest notificationRequest) throws IOException, ParseException {
         Notification notification = null;
@@ -122,8 +126,8 @@ public class WechatPayNotificationParser {
             throw new ValidationException("signature为空");
         }
         if (!verifier.verify(serialNumber, message, signature)) {
-            String errorMessage = String
-                .format("验签失败：serial=[%s] message=[%s] sign=[%s]", serialNumber, new String(message), signature);
+            String errorMessage = String.format("验签失败：serial=[%s] message=[%s] sign=[%s]", serialNumber,
+                                                new String(message), signature);
             throw new ValidationException(errorMessage);
         }
     }

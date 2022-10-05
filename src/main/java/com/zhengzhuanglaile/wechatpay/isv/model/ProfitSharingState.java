@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 分账单状态每个接收方的分账结果请查看receivers中的result字段
+ * 
  * @author dengying.zhang 2022年9月16日 下午2:53:24
  * @since 1.0.0
  */

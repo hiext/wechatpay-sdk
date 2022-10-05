@@ -1,9 +1,10 @@
-package com.zhengzhuanglaile.wechatpay.isv;
+package com.zhengzhuanglaile.wechatpay.mch;
 
 import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
-import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
+import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
 import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
+import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
 import com.zhengzhuanglaile.wechatpay.result.NativePayResult;
@@ -31,18 +32,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * 服务商退款接口
- *
- * @author dengying.zhang
- */
-public class IsvRefundApi {
+public class RefundApi {
 
-    private static Logger       logger           = LoggerFactory.getLogger(IsvRefundApi.class);
-    private static final String REFUND_URI       = "/v3/refund/domestic/refunds";
-
-    private static final String REFUND_QUERY_URI = "/v3/refund/domestic/refunds/";
-    private static Validator    validator        = null;
+    private static Logger       logger     = LoggerFactory.getLogger(RefundApi.class);
+    private static final String REFUND_URI = "/v3/refund/domestic/refunds";
+    private static Validator    validator  = null;
 
     protected static void init() {
         // 初始化校验器
@@ -50,13 +44,13 @@ public class IsvRefundApi {
         validator = validatorFactory.getValidator();
     }
 
-    public static Refund createRefunds(IsvPayRefundParam param, WechatPayConfig wechatPayConfig) {
+    public static Refund createRefunds(PayRefundParam param, WechatPayConfig wechatPayConfig) {
 
         init();
-        Set<ConstraintViolation<IsvPayRefundParam>> set = validator.validate(param);
+        Set<ConstraintViolation<PayRefundParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
-            for (ConstraintViolation<IsvPayRefundParam> constraintViolation : set) {
+            for (ConstraintViolation<PayRefundParam> constraintViolation : set) {
                 validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
                                    + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
@@ -118,9 +112,7 @@ public class IsvRefundApi {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         return result;
     }
-
 }

@@ -30,8 +30,8 @@ import com.wechat.pay.contrib.apache.httpclient.util.PemUtil;
 import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
 
 /**
- * 
  * 证书管理工具类
+ * 
  * @author dengying.zhang 2022年8月18日 上午10:22:11
  * @since 1.0.0
  */
@@ -75,15 +75,15 @@ public class CertificatesManagerUtil {
         this.certificatesManager = CertificatesManager.getInstance();
         // 向证书管理器增加需要自动更新平台证书的商户信息
         this.certificatesManager.putMerchant(merchantId,
-            new WechatPay2Credentials(merchantId, new PrivateKeySigner(merchantSerialNumber, merchantPrivateKey)),
-            apiV3Key.getBytes(StandardCharsets.UTF_8));
+                                             new WechatPay2Credentials(merchantId,
+                                                                       new PrivateKeySigner(merchantSerialNumber,
+                                                                                            merchantPrivateKey)),
+                                             apiV3Key.getBytes(StandardCharsets.UTF_8));
         // 从证书管理器中获取verifier
         this.verifier = certificatesManager.getVerifier(merchantId);
         // 构造httpclient
-        this.httpClient = WechatPayHttpClientBuilder.create()
-            .withMerchant(merchantId, merchantSerialNumber, merchantPrivateKey)
-            .withValidator(new WechatPay2Validator(verifier))
-            .build();
+        this.httpClient = WechatPayHttpClientBuilder.create().withMerchant(merchantId, merchantSerialNumber,
+                                                                           merchantPrivateKey).withValidator(new WechatPay2Validator(verifier)).build();
     }
 
     public Verifier getVerifier() {
@@ -96,8 +96,9 @@ public class CertificatesManagerUtil {
 
     /**
      * 获取新的证书
-     * @throws IOException 
-     * @throws ClientProtocolException 
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
      */
     public WechatPayCertificateResult getCertificate() {
         HttpGet httpGet = new HttpGet(CertificatesManagerUtil.URI);

@@ -33,14 +33,9 @@ public class WechatPayNativePayApiTest {
 
     private final String                 notifyUrl       = "https://shop.zhengzhuanglaile.com/site/wechatpay/nativenotify";
 
-    private static final WechatPayConfig wechatPayConfig = WechatPayConfig.builder()
-        .setApiV3Key(WechatPayConstant.getApiv3key())
-        .setMerchantId(WechatPayConstant.getMerchantId())
-        .setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber())
-        .setPrivateKey(WechatPayConstant.getMerchantPrivatekey())
-        .build();
+    private static final WechatPayConfig wechatPayConfig = WechatPayConfig.builder().setApiV3Key(WechatPayConstant.getApiv3key()).setMerchantId(WechatPayConstant.getMerchantId()).setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber()).setPrivateKey(WechatPayConstant.getMerchantPrivatekey()).build();
 
-   // @Test
+    // @Test
     public void testCreatOrder() {
         WechatPayIsvNativePayCreateOrderParam param = new WechatPayIsvNativePayCreateOrderParam();
         param.setSpAppid(spAppid);
@@ -54,8 +49,8 @@ public class WechatPayNativePayApiTest {
         NativePayResult result = WechatPayIsvNativePayApi.createOrder(param, wechatPayConfig);
         logger.info(result.getCodeUrl());
         ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).plusDays(1L);
-        logger.info(
-            zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT, Locale.CHINA)));
+        logger.info(zonedDateTime.format(DateTimeFormatter.ofPattern(WechatPayConstant.WECHAT_PAY_DATE_FORMAT,
+                                                                     Locale.CHINA)));
     }
 
     @Test
@@ -66,7 +61,7 @@ public class WechatPayNativePayApiTest {
         csaobStatusQueryParam.setSpMchid(spMchid);
         csaobStatusQueryParam.setSubMchid(subMchid);
         WechatPayIsvOrderInfo statusQueryResult = WechatPayIsvNativePayApi.queryOrderStatus(csaobStatusQueryParam,
-            wechatPayConfig);
+                                                                                            wechatPayConfig);
         logger.info(statusQueryResult.toString());
     }
 
@@ -92,7 +87,7 @@ public class WechatPayNativePayApiTest {
         narivePayRefundParam.setOutTradeNo("1630412847001008");
         narivePayRefundParam.setReason("测试");
         WechatPayBaseResult wechatPayBaseResult = WechatPayIsvNativePayApi.refund(narivePayRefundParam,
-            wechatPayConfig);
+                                                                                  wechatPayConfig);
         logger.info(wechatPayBaseResult.toString());
     }
 }
