@@ -1,6 +1,7 @@
 package com.zhengzhuanglaile.wechatpay.mch;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
@@ -10,11 +11,14 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -27,6 +31,7 @@ import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
 import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
 import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
+import com.zhengzhuanglaile.wechatpay.mch.param.RefundQueryParam;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
@@ -37,9 +42,10 @@ import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
  */
 public class RefundApi {
 
-    private static final Logger       logger     = LoggerFactory.getLogger(RefundApi.class);
-    private static final String REFUND_URI = "/v3/refund/domestic/refunds";
-    private static Validator    validator  = null;
+    private static final Logger logger           = LoggerFactory.getLogger(RefundApi.class);
+    private static final String REFUND_URI       = "/v3/refund/domestic/refunds";
+    private static final String REFUND_QUERY_URI = "/v3/refund/domestic/refunds/";
+    private static Validator    validator        = null;
 
     protected static void init() {
         // 初始化校验器
@@ -80,7 +86,7 @@ public class RefundApi {
         CloseableHttpResponse response = null;
         Refund result = null;
         try {
-            String res = null;
+            String res;
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
@@ -117,5 +123,56 @@ public class RefundApi {
             }
         }
         return result;
+    }
+
+    /**
+     * 查询单笔退款（通过商户退款单号）
+     * 
+     * @param param
+     * @param wechatPayConfig
+     * @return
+     */
+    public static Refund queryByOutRefundNo(RefundQueryParam param, WechatPayConfig wechatPayConfig) {
+        init();
+        Set<ConstraintViolation<RefundQueryParam>> set = validator.validate(param);
+        if (set != null && set.size() > 0) {
+            ArrayList<String> validateString = new ArrayList<>();
+            for (ConstraintViolation<RefundQueryParam> constraintViolation : set) {
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
+                logger.info("错误：" + constraintViolation.getMessage());
+                logger.info("字段：" + constraintViolation.getPropertyPath().toString());
+            }
+            throw new IllegalArgumentException(StringHelper.join(validateString, ";"));
+        }
+        String uri = WechatPayConstant.WECHAT_HTTPS + WechatPayConstant.WECHAT_PAY_HOST + REFUND_QUERY_URI
+                     + param.getOutRefundNo() + "?";
+        String[] resTemp = { null };
+        try {
+            RequestClientUtil.build(wechatPayConfig).get(new URIBuilder(uri).build(), (response) -> {
+                if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+                    HttpEntity entity = response.getEntity();
+                    try {
+                        String res = EntityUtils.toString(entity);
+                        resTemp[0] = res;
+                    } catch (ParseException | IOException e) {
+                        logger.error(e.toString());
+                        e.printStackTrace();
+                    }
+                }
+                logger.info("=========返回数据开始==============");
+                logger.info(resTemp[0]);
+                logger.info("=========返回数据结束==============");
+            });
+        } catch (URISyntaxException e) {
+            logger.error(e.toString());
+            e.printStackTrace();
+        }
+        if (null == resTemp[0] || "".equals(resTemp[0])) {
+            Refund refund = new Refund();
+            refund.setBaseResult(WechatPayResultCode.FAIL);
+            return refund;
+        }
+        return GsonUtil.getGson().fromJson(resTemp[0], Refund.class);
     }
 }
