@@ -12,6 +12,7 @@ import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
 import org.apache.http.HttpHeaders;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -81,13 +82,13 @@ public class RefundApi {
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
                 logger.info(res);
                 result = GsonUtil.getGson().fromJson(res, Refund.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
                 result = GsonUtil.getGson().fromJson(res, Refund.class);

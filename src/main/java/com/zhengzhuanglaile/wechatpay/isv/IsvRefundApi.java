@@ -1,16 +1,17 @@
 package com.zhengzhuanglaile.wechatpay.isv;
 
-import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
-import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
-import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
-import com.zhengzhuanglaile.wechatpay.result.NativePayResult;
-import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
-import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
-import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import org.apache.http.HttpHeaders;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -22,14 +23,14 @@ import org.hibernate.validator.internal.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Set;
+import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
+import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
+import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
+import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
+import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
+import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
 
 /**
  * 服务商退款接口
@@ -87,13 +88,13 @@ public class IsvRefundApi {
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
                 logger.info(res);
                 result = GsonUtil.getGson().fromJson(res, Refund.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
                 result = GsonUtil.getGson().fromJson(res, Refund.class);

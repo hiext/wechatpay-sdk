@@ -116,12 +116,12 @@ public class WechatPayIsvNativePayApi {
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
                 result = GsonUtil.getGson().fromJson(res, NativePayResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
                 result = GsonUtil.getGson().fromJson(res, NativePayResult.class);
@@ -247,7 +247,7 @@ public class WechatPayIsvNativePayApi {
         try {
             response = httpClient.execute(httpPost);
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode || 204 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode || HttpStatus.SC_NO_CONTENT == statusCode) {
                 result = new WechatPayBaseResult(WechatPayResultCode.SUCCESS);
             } else {
                 logger.info("=========返回数据开始==============");
@@ -312,13 +312,13 @@ public class WechatPayIsvNativePayApi {
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
                 logger.info(res);
                 result = GsonUtil.getGson().fromJson(res, NativePayResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
                 result = GsonUtil.getGson().fromJson(res, NativePayResult.class);
