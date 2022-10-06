@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
 import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
-import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
+import com.zhengzhuanglaile.wechatpay.refund.Refund;
 import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
 import com.zhengzhuanglaile.wechatpay.mch.param.RefundQueryParam;
 import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;

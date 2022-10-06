@@ -1,4 +1,4 @@
-package com.zhengzhuanglaile.wechatpay.mch.model;
+package com.zhengzhuanglaile.wechatpay.refund;
 
 import com.google.gson.annotations.SerializedName;
 import com.zhengzhuanglaile.wechatpay.mch.param.GoodsDetail;

@@ -232,9 +232,9 @@ public class WechatPayIsvAppletApi {
             e.printStackTrace();
         }
         if (null == resTemp[0] || "".equals(resTemp[0])) {
-            WechatPayIsvOrderInfo csaobStatusQueryResult = new WechatPayIsvOrderInfo();
-            csaobStatusQueryResult.setBaseResult(WechatPayResultCode.FAIL);
-            return csaobStatusQueryResult;
+            WechatPayIsvOrderInfo isvOrderInfo = new WechatPayIsvOrderInfo();
+            isvOrderInfo.setBaseResult(WechatPayResultCode.FAIL);
+            return isvOrderInfo;
         }
         return GsonUtil.getGson().fromJson(resTemp[0], WechatPayIsvOrderInfo.class);
     }
