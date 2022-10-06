@@ -1,16 +1,15 @@
 package com.zhengzhuanglaile.wechatpay.mch;
 
-import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
-import com.zhengzhuanglaile.wechatpay.isv.param.IsvPayRefundParam;
-import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
-import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
-import com.zhengzhuanglaile.wechatpay.result.NativePayResult;
-import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
-import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
-import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -24,18 +23,21 @@ import org.hibernate.validator.internal.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Set;
+import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
+import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.WechatPayIsvNativePayCreateOrderParam;
+import com.zhengzhuanglaile.wechatpay.mch.model.Refund;
+import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
+import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
+import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
 
+/**
+ * @author dengying.zhang
+ */
 public class RefundApi {
 
-    private static Logger       logger     = LoggerFactory.getLogger(RefundApi.class);
+    private static final Logger       logger     = LoggerFactory.getLogger(RefundApi.class);
     private static final String REFUND_URI = "/v3/refund/domestic/refunds";
     private static Validator    validator  = null;
 
