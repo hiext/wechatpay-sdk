@@ -17,7 +17,7 @@ public class Test {
     @org.junit.Test
     public void testQueryTransactions() {
         ProfitSharingAmountQueryParam sharingAmountQueryParam = new ProfitSharingAmountQueryParam();
-        String orderId = "4200001591202209264231266457";
+        String orderId = "4200001619202210077113562525";
         sharingAmountQueryParam.setTransactionId(orderId);
         ProfitSharingAmount statusQueryResult = IsvProfitSharingApi.queryProfitSharingAmount(sharingAmountQueryParam,
                                                                                              wechatPayConfig);
