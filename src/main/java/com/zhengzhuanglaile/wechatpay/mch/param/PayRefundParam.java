@@ -1,7 +1,7 @@
 package com.zhengzhuanglaile.wechatpay.mch.param;
 
 import com.google.gson.annotations.SerializedName;
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.RefundAmountParam;
+import com.zhengzhuanglaile.wechatpay.refund.RefundAmountParam;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;

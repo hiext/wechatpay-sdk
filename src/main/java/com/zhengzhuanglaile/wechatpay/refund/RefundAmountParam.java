@@ -1,4 +1,4 @@
-package com.zhengzhuanglaile.wechatpay.isv.nativepay.param;
+package com.zhengzhuanglaile.wechatpay.refund;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,12 +1,11 @@
 package com.zhengzhuanglaile.wechatpay.refund;
 
-import com.google.gson.annotations.SerializedName;
-import com.zhengzhuanglaile.wechatpay.model.Amount;
-import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
-import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
+import com.zhengzhuanglaile.wechatpay.result.WechatPayBaseResult;
+import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 public class Refund extends WechatPayBaseResult {
 
@@ -59,7 +58,7 @@ public class Refund extends WechatPayBaseResult {
      * 金额信息 说明：金额详细信息
      */
     @SerializedName("amount")
-    private Amount                amount;
+    private RefundAmount          amount;
     /**
      * 退款渠道 说明：枚举值： - ORIGINAL—原路退款 - BALANCE—退回到余额 - OTHER_BALANCE—原账户异常退到其他余额账户 - OTHER_BANKCARD—原银行卡异常退到其他银行卡
      */
@@ -142,11 +141,11 @@ public class Refund extends WechatPayBaseResult {
         this.promotionDetail = promotionDetail;
     }
 
-    public Amount getAmount() {
+    public RefundAmount getAmount() {
         return amount;
     }
 
-    public void setAmount(Amount amount) {
+    public void setAmount(RefundAmount amount) {
         this.amount = amount;
     }
 

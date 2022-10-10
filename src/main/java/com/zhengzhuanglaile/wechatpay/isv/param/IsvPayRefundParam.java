@@ -2,7 +2,6 @@ package com.zhengzhuanglaile.wechatpay.isv.param;
 
 import javax.validation.constraints.NotNull;
 
-import com.zhengzhuanglaile.wechatpay.isv.nativepay.param.RefundAmountParam;
 import com.zhengzhuanglaile.wechatpay.mch.param.PayRefundParam;
 import org.hibernate.validator.constraints.Length;
 
