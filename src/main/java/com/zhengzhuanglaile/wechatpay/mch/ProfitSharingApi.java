@@ -1,4 +1,4 @@
-package com.zhengzhuanglaile.wechatpay.isv;
+package com.zhengzhuanglaile.wechatpay.mch;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,14 +11,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.zhengzhuanglaile.wechatpay.isv.model.WechatPayProfitSharingCreateOrderResult;
-import com.zhengzhuanglaile.wechatpay.isv.param.WechatPayProfitSharingCreateOrderParam;
-import com.zhengzhuanglaile.wechatpay.isv.param.WechatPayProfitSharingQueryParam;
-import com.zhengzhuanglaile.wechatpay.isv.param.WechatPayProfitSharingUnfreezeParam;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
-import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
-import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
-import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -36,15 +28,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zhengzhuanglaile.wechatpay.WechatPayConstant;
+import com.zhengzhuanglaile.wechatpay.mch.model.ProfitSharingCreateOrderResult;
+import com.zhengzhuanglaile.wechatpay.mch.param.ProfitSharingCreateOrderParam;
+import com.zhengzhuanglaile.wechatpay.mch.param.ProfitSharingQueryParam;
+import com.zhengzhuanglaile.wechatpay.mch.param.ProfitSharingUnfreezeParam;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayConfig;
+import com.zhengzhuanglaile.wechatpay.model.WechatPayResultCode;
+import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
+import com.zhengzhuanglaile.wechatpay.util.RequestClientUtil;
 
 /**
- * 微信支付分账相关接口
- * @author dengying.zhang 2022年9月16日 下午1:40:59
- * @since 1.0.0
+ * @author dengying.zhang
  */
-public class WechatPayProfitSharingApi {
+public class ProfitSharingApi {
 
-    private static Logger       logger          = LoggerFactory.getLogger(WechatPayProfitSharingApi.class);
+    private static Logger       logger          = LoggerFactory.getLogger(ProfitSharingApi.class);
 
     private static final String REATE_ORDER_URI = "/v3/profitsharing/orders";
 
@@ -60,19 +58,20 @@ public class WechatPayProfitSharingApi {
 
     /**
      * 创建分账订单
+     * 
      * @param param
      * @param wechatPayConfig
      * @return
      */
-    public static WechatPayProfitSharingCreateOrderResult createOrder(WechatPayProfitSharingCreateOrderParam param,
-                                                                      WechatPayConfig wechatPayConfig) {
+    public static ProfitSharingCreateOrderResult createOrder(ProfitSharingCreateOrderParam param,
+                                                             WechatPayConfig wechatPayConfig) {
         init();
-        Set<ConstraintViolation<WechatPayProfitSharingCreateOrderParam>> set = validator.validate(param);
+        Set<ConstraintViolation<ProfitSharingCreateOrderParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
-            for (ConstraintViolation<WechatPayProfitSharingCreateOrderParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+            for (ConstraintViolation<ProfitSharingCreateOrderParam> constraintViolation : set) {
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -85,9 +84,9 @@ public class WechatPayProfitSharingApi {
         logger.info("=========初始化参数==============");
         HttpPost httpPost = new HttpPost(uri);
         StringEntity entity = new StringEntity(GsonUtil.getGson().toJson(param),
-            Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
+                                               Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
-        logger.info("=========参数:" + WechatPayProfitSharingCreateOrderParam.class + "==============");
+        logger.info("=========参数:" + ProfitSharingCreateOrderParam.class + "==============");
         httpPost.setEntity(entity);
         logger.info("=========入参开始==============");
         logger.info(GsonUtil.getGson().toJson(param));
@@ -95,26 +94,26 @@ public class WechatPayProfitSharingApi {
         logger.info(uri);
         httpPost.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString());
         CloseableHttpResponse response = null;
-        WechatPayProfitSharingCreateOrderResult result = null;
+        ProfitSharingCreateOrderResult result = null;
         try {
             String res = null;
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
             } else {
                 res = EntityUtils.toString(response.getEntity());
                 logger.error(res);
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.FAIL, res);
             }
             logger.info(res);
@@ -137,19 +136,20 @@ public class WechatPayProfitSharingApi {
 
     /**
      * 查询
+     * 
      * @param param WechatPayProfitSharingQueryParam
      * @param wechatPayConfig
      * @return
      */
-    public WechatPayProfitSharingCreateOrderResult queryOrderState(WechatPayProfitSharingQueryParam param,
-                                                                   WechatPayConfig wechatPayConfig) {
+    public static ProfitSharingCreateOrderResult queryOrderState(ProfitSharingQueryParam param,
+                                                                 WechatPayConfig wechatPayConfig) {
         init();
-        Set<ConstraintViolation<WechatPayProfitSharingQueryParam>> set = validator.validate(param);
+        Set<ConstraintViolation<ProfitSharingQueryParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
-            for (ConstraintViolation<WechatPayProfitSharingQueryParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+            for (ConstraintViolation<ProfitSharingQueryParam> constraintViolation : set) {
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -160,7 +160,6 @@ public class WechatPayProfitSharingApi {
         String resTemp[] = { null };
         try {
             URIBuilder uriBuilder = new URIBuilder(uri);
-            uriBuilder.setParameter("sub_mchid", param.getSubMchid());
             uriBuilder.setParameter("transaction_id", param.getTransactionId());
             RequestClientUtil.build(wechatPayConfig).get(uriBuilder.build(), (response) -> {
                 if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
@@ -182,28 +181,29 @@ public class WechatPayProfitSharingApi {
             e.printStackTrace();
         }
         if (null == resTemp[0] || "".equals(resTemp[0])) {
-            WechatPayProfitSharingCreateOrderResult payProfitSharingCreateOrderResult = new WechatPayProfitSharingCreateOrderResult();
+            ProfitSharingCreateOrderResult payProfitSharingCreateOrderResult = new ProfitSharingCreateOrderResult();
             payProfitSharingCreateOrderResult.setBaseResult(WechatPayResultCode.FAIL);
             return payProfitSharingCreateOrderResult;
         }
-        return GsonUtil.getGson().fromJson(resTemp[0], WechatPayProfitSharingCreateOrderResult.class);
+        return GsonUtil.getGson().fromJson(resTemp[0], ProfitSharingCreateOrderResult.class);
     }
 
     /**
      * 解冻剩余资
+     * 
      * @param param
      * @param wechatPayConfig
      * @return
      */
-    public WechatPayProfitSharingCreateOrderResult unfreeze(WechatPayProfitSharingUnfreezeParam param,
-                                                            WechatPayConfig wechatPayConfig) {
+    public static ProfitSharingCreateOrderResult unfreeze(ProfitSharingUnfreezeParam param,
+                                                          WechatPayConfig wechatPayConfig) {
         init();
-        Set<ConstraintViolation<WechatPayProfitSharingUnfreezeParam>> set = validator.validate(param);
+        Set<ConstraintViolation<ProfitSharingUnfreezeParam>> set = validator.validate(param);
         if (set != null && set.size() > 0) {
             ArrayList<String> validateString = new ArrayList<>();
-            for (ConstraintViolation<WechatPayProfitSharingUnfreezeParam> constraintViolation : set) {
-                validateString.add(
-                    "字段：" + constraintViolation.getPropertyPath().toString() + "-" + constraintViolation.getMessage());
+            for (ConstraintViolation<ProfitSharingUnfreezeParam> constraintViolation : set) {
+                validateString.add("字段：" + constraintViolation.getPropertyPath().toString() + "-"
+                                   + constraintViolation.getMessage());
                 logger.info("错误：" + constraintViolation.getMessage());
                 logger.info("字段：" + constraintViolation.getPropertyPath().toString());
             }
@@ -216,9 +216,9 @@ public class WechatPayProfitSharingApi {
         logger.info("=========初始化参数==============");
         HttpPost httpPost = new HttpPost(uri);
         StringEntity entity = new StringEntity(GsonUtil.getGson().toJson(param),
-            Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
+                                               Charset.forName(WechatPayConstant.DEFAULT_CHARTSET_NAME));
         entity.setContentType(ContentType.APPLICATION_JSON.toString());
-        logger.info("=========参数:" + WechatPayProfitSharingCreateOrderParam.class + "==============");
+        logger.info("=========参数:" + ProfitSharingCreateOrderParam.class + "==============");
         httpPost.setEntity(entity);
         logger.info("=========入参开始==============");
         logger.info(GsonUtil.getGson().toJson(param));
@@ -226,26 +226,26 @@ public class WechatPayProfitSharingApi {
         logger.info(uri);
         httpPost.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString());
         CloseableHttpResponse response = null;
-        WechatPayProfitSharingCreateOrderResult result = null;
+        ProfitSharingCreateOrderResult result = null;
         try {
             String res = null;
             response = httpClient.execute(httpPost);
             logger.info("=========返回数据开始==============");
             int statusCode = response.getStatusLine().getStatusCode();
-            if (200 == statusCode) {
+            if (HttpStatus.SC_OK == statusCode) {
 
                 res = EntityUtils.toString(response.getEntity());
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
-            } else if (202 == statusCode) {
+            } else if (HttpStatus.SC_ACCEPTED == statusCode) {
                 CloseableHttpResponse response2 = httpClient.execute(httpPost);
                 res = EntityUtils.toString(response2.getEntity());
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.SUCCESS);
             } else {
                 res = EntityUtils.toString(response.getEntity());
                 logger.error(res);
-                result = GsonUtil.getGson().fromJson(res, WechatPayProfitSharingCreateOrderResult.class);
+                result = GsonUtil.getGson().fromJson(res, ProfitSharingCreateOrderResult.class);
                 result.setBaseResult(WechatPayResultCode.FAIL, res);
             }
             logger.info(res);
@@ -265,5 +265,4 @@ public class WechatPayProfitSharingApi {
         }
         return result;
     }
-
 }

@@ -8,6 +8,7 @@ import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
  * 商户订单号查询参数
+ * 
  * @author dengying.zhang 2022年8月18日 下午4:50:31
  * @since 1.0.0
  */

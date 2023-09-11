@@ -30,7 +30,6 @@ public class WechatPayConstant {
     private static final String   MERCHANT_ID            = "1230000109";
     /**
      * 商户的APIKey 32位字符串
-     * 
      */
     private static final String   API_V3_KEY             = "niyaoshezhideshanghudeapiv3key12";
     /**
@@ -47,6 +46,7 @@ public class WechatPayConstant {
 
     /**
      * API V3密钥
+     * 
      * @return
      */
     public static String getApiv3key() {
@@ -59,6 +59,7 @@ public class WechatPayConstant {
 
     /**
      * 商户号
+     * 
      * @return
      */
     public static String getMerchantId() {
@@ -79,7 +80,8 @@ public class WechatPayConstant {
 
     /**
      * 获取商户证书序列号
-     * @return 
+     * 
+     * @return
      */
     public static String getMerchantSerialNumber() {
         if (propertiesUtil.getProperty("wechatpay.merchantSerialNumber") == null) {
@@ -91,6 +93,7 @@ public class WechatPayConstant {
 
     /**
      * 获取商户的私钥
+     * 
      * @return
      */
     public static String getMerchantPrivatekey() {

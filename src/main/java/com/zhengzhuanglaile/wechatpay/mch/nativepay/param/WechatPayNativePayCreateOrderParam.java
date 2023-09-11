@@ -10,6 +10,7 @@ import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
 
 /**
  * 商户直连方式 创建订单
+ * 
  * @author dengying.zhang 2022年8月23日 下午2:30:51
  * @since 1.0.0
  */
@@ -23,8 +24,7 @@ public class WechatPayNativePayCreateOrderParam extends BaseCreateOrderParam {
     @SerializedName("appid")
     private String appid;
     /**
-     * 直连商户号    mchid    string[1,32]    是   body 服务商户号，由微信支付生成并下发
-    示例值：1230000109
+     * 直连商户号 mchid string[1,32] 是 body 服务商户号，由微信支付生成并下发 示例值：1230000109
      */
     @NotNull(message = "mchid 服务商户号不能为空")
     @Length(min = 1, max = 32)

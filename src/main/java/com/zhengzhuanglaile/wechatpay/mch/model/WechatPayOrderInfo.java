@@ -12,8 +12,7 @@ public class WechatPayOrderInfo extends BaseOrderInfo {
     @SerializedName("appid")
     private String         appid;
     /**
-     * 直连商户号    mchid    string[1,32]    是   body 服务商户号，由微信支付生成并下发
-    示例值：1230000109
+     * 直连商户号 mchid string[1,32] 是 body 服务商户号，由微信支付生成并下发 示例值：1230000109
      */
     @SerializedName("mchid")
     private String         mchid;

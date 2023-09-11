@@ -1,5 +1,5 @@
 
-package com.zhengzhuanglaile.wechatpay.isv.nativepay.param;
+package com.zhengzhuanglaile.wechatpay.refund;
 
 import com.google.gson.annotations.SerializedName;
 import com.zhengzhuanglaile.wechatpay.util.GsonUtil;
