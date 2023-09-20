@@ -6,7 +6,7 @@
 
     <groupId>com.zhengzhuanglaile</groupId>
     <artifactId>wechatpay-sdk</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>wechatpay-sdk</name>
     <description>微信支付SDK-包含服务商模式、商户方式接入</description>
     <developers>
