@@ -12,11 +12,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -114,11 +114,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -157,11 +157,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -197,11 +197,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr >
@@ -237,11 +237,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -275,11 +275,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -342,11 +342,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>
@@ -377,11 +377,11 @@ import com.zhengzhuanglaile.wechatpay.base.BaseCreateOrderParam;
  * <table class="table">
  * <thead>
  * <tr>
- * <th width="17%">参数名</th>
+ * <th >参数名</th>
  * <th>变量</th>
- * <th width="17%">类型[长度限制]</th>
- * <th width="10%">必填</th>
- * <th width="38%">描述</th>
+ * <th >类型[长度限制]</th>
+ * <th >必填</th>
+ * <th>描述</th>
  * </tr>
  * </thead> <tbody>
  * <tr>

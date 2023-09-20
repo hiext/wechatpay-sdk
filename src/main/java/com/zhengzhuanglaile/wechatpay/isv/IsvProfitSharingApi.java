@@ -64,10 +64,9 @@ public class IsvProfitSharingApi {
 
     /**
      * 创建分账订单
-     * 
-     * @param param
+     * @param param 入参
      * @param wechatPayConfig
-     * @return
+     * @return IsvProfitSharingCreateOrderResult
      */
     public static IsvProfitSharingCreateOrderResult createOrder(IsvProfitSharingCreateOrderParam param,
                                                                 WechatPayConfig wechatPayConfig) {
