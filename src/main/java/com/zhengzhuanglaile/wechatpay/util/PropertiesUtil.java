@@ -28,7 +28,9 @@ public class PropertiesUtil {
     }
 
     /**
-     * 通过properties的key获取value
+     *  通过properties的key获取value
+     * @param key
+     * @return
      */
     public String getProperty(String key) {
         String value = properties.getProperty(key.trim());

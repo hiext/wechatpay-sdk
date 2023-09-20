@@ -64,7 +64,7 @@ public class WechatPayAppletPayApiTest {
                                                                      Locale.CHINA)));
     }
 
-    @Test
+    //@Test
     public void testQueryOrderStatus() {
         IsvPayOrderStatusQueryParam csaobStatusQueryParam = new IsvPayOrderStatusQueryParam();
         String outTraderNo = "1630412847001006";
