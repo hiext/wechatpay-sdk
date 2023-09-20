@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zhengzhuanglaile</groupId>
+    <groupId>com.hiext</groupId>
     <artifactId>wechatpay-sdk</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>wechatpay-sdk</name>
     <description>微信支付SDK-包含服务商模式、商户方式接入</description>
     <developers>
@@ -28,6 +28,12 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/hiext/wechatpay-sdk.git</connection>
+        <developerConnection>scm:git:ssh://github.com:hiext/wechatpay-sdk.git</developerConnection>
+        <url>http://github.com/hiext/wechatpay-sdk/tree/main</url>
+    </scm>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
