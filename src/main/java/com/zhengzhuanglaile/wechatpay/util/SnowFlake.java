@@ -4,7 +4,7 @@ package com.zhengzhuanglaile.wechatpay.util;
  * twitter的snowflake算法 -- java实现
  * 
  * @author beyond
- * @date 2016/11/26
+ * @since  2016/11/26
  */
 public class SnowFlake {
 

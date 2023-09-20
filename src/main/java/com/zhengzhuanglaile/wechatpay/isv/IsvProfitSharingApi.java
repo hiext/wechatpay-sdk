@@ -65,7 +65,7 @@ public class IsvProfitSharingApi {
     /**
      * 创建分账订单
      * @param param 入参
-     * @param wechatPayConfig
+     * @param wechatPayConfig 参数配置
      * @return IsvProfitSharingCreateOrderResult
      */
     public static IsvProfitSharingCreateOrderResult createOrder(IsvProfitSharingCreateOrderParam param,
@@ -143,7 +143,7 @@ public class IsvProfitSharingApi {
      * 查询
      * 
      * @param param WechatPayProfitSharingQueryParam
-     * @param wechatPayConfig
+     * @param wechatPayConfig 参数配置
      * @return
      */
     public static IsvProfitSharingCreateOrderResult queryOrderState(IsvProfitSharingQueryParam param,
@@ -197,8 +197,8 @@ public class IsvProfitSharingApi {
     /**
      * 解冻剩余资
      * 
-     * @param param
-     * @param wechatPayConfig
+     * @param param the parameter
+     * @param wechatPayConfig the wechatPayConfig
      * @return
      */
     public static IsvProfitSharingCreateOrderResult unfreeze(IsvProfitSharingUnfreezeParam param,

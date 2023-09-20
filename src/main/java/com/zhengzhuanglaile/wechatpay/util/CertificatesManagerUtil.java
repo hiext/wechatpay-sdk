@@ -96,9 +96,7 @@ public class CertificatesManagerUtil {
 
     /**
      * 获取新的证书
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
+     *
      */
     public WechatPayCertificateResult getCertificate() {
         HttpGet httpGet = new HttpGet(CertificatesManagerUtil.URI);

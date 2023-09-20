@@ -96,7 +96,7 @@ public class WechatPayNotificationParser {
      * @return 解密后的消息 Notification.getDecryptData();
      * @throws ParseException
      */
-    public Notification parser(NotificationRequest notificationRequest) throws IOException, ParseException {
+    public Notification parser(NotificationRequest notificationRequest) throws ParseException {
         Notification notification = null;
         try {
             validate(notificationRequest);
