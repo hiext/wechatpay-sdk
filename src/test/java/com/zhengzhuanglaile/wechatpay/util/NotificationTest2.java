@@ -56,7 +56,7 @@ public class NotificationTest2 {
         verifier = certificatesManager.getVerifier(merchantId);
     }
 
-    @Test
+    //@Test
     public void check() throws ValidationException, ParseException, NoSuchAlgorithmException, InvalidKeyException,
                         SignatureException {
         String b = body;

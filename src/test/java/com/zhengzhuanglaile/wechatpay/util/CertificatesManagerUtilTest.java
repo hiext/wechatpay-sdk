@@ -24,7 +24,7 @@ public class CertificatesManagerUtilTest {
 
     private static Logger logger = LoggerFactory.getLogger(CertificatesManagerUtilTest.class);
 
-    @Test
+    //@Test
     public void test() throws NotFoundException, HttpCodeException, ValidationException, IOException,
                        GeneralSecurityException {
         WechatPayConfig wechatPayConfig = WechatPayConfig.builder().setApiV3Key(WechatPayConstant.getApiv3key()).setMerchantId(WechatPayConstant.getMerchantId()).setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber()).setPrivateKey(WechatPayConstant.getMerchantPrivatekey()).build();

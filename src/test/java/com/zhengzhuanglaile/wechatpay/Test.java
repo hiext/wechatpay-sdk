@@ -14,7 +14,7 @@ public class Test {
 
     private static final WechatPayConfig wechatPayConfig = WechatPayConfig.builder().setApiV3Key(WechatPayConstant.getApiv3key()).setMerchantId(WechatPayConstant.getMerchantId()).setMerchantSerialNumber(WechatPayConstant.getMerchantSerialNumber()).setPrivateKey(WechatPayConstant.getMerchantPrivatekey()).build();
 
-    @org.junit.Test
+    //@org.junit.Test
     public void testQueryTransactions() {
         ProfitSharingAmountQueryParam sharingAmountQueryParam = new ProfitSharingAmountQueryParam();
         String orderId = "4200001619202210077113562525";

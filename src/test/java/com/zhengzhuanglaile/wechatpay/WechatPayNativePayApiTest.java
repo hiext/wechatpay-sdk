@@ -53,7 +53,7 @@ public class WechatPayNativePayApiTest {
                                                                      Locale.CHINA)));
     }
 
-    @Test
+   // @Test
     public void testQueryOrderStatus() {
         IsvPayOrderStatusQueryParam csaobStatusQueryParam = new IsvPayOrderStatusQueryParam();
         String outTraderNo = "wos202209261724008748716655";

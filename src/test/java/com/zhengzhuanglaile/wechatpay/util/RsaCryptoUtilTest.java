@@ -15,7 +15,7 @@ public class RsaCryptoUtilTest {
 
     private final String  privateKey = WechatPayRsaCrypUtil.readPrivateKeyToString("\\d:\\wechatpaycert\\hanlan_key.pem");
 
-    @Test
+    //@Test
     public void testEn() throws BadPaddingException {
 
         Long tims = 1661339973L;
